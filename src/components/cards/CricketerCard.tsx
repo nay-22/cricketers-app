@@ -14,9 +14,9 @@ const CricketerCard: FC<TPlayer> = ({
   dob,
 }) => {
   return (
-    <div className="rounded-xl w-full">
+    <div className="rounded-xl w-full min-w-[250px]">
       <div className="bg-gray-300 rounded-t-xl p-2 flex items-center justify-between">
-        {name && <div className="text-xl font-semibold">{name}</div>}
+        {name && <div className="text-lg sm:text-2xl font-semibold overflow-hidden whitespace-nowrap text-ellipsis">{name}</div>}
         {dob && (
           <div className="font-semibold text-gray-600">
             {new Date(dob).toLocaleDateString()}
@@ -25,11 +25,11 @@ const CricketerCard: FC<TPlayer> = ({
       </div>
       {description && <div className="p-2">{description}</div>}
       <div className="p-2 bg-gray-300 rounded-b-2xl flex items-center justify-start gap-2">
-        {type && <Chip className="bg-slate-500 text-white">Type: {type}</Chip>}
+        {type && <Chip className="bg-amber-400 font-semibold text-xs sm:text-lg">Type: {type}</Chip>}
         {points && (
-          <Chip className="bg-slate-500 text-white">Points: {points}</Chip>
+          <Chip className="bg-slate-500 text-white text-xs sm:text-lg">Points: {points}</Chip>
         )}
-        {rank && <Chip className="bg-slate-500 text-white">Rank: {rank}</Chip>}
+        {rank && <Chip className="bg-slate-500 text-white text-xs sm:text-lg">Rank: {rank}</Chip>}
       </div>
     </div>
   );
