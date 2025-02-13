@@ -1,6 +1,7 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { App } from "../../types";
 import AppContext from "../AppContext";
+import getPlayers from "../../api/get-players";
 
 const AppProvider = ({ children }: { children: ReactNode }) => {
   const [app, setApp] = useState<App>({
@@ -12,6 +13,16 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
     players: [],
     theme: "light",
   });
+
+  useEffect(() => {
+    const fetchCriketers = async () => {
+      const players = await getPlayers();
+      setApp(prev => ({ ...prev, players }))
+    }
+
+    fetchCriketers();
+  }, []);
+
   return (
     <AppContext.Provider value={{ app, setApp }}>
       {children}
