@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import FilterIcon from "../assets/icons/FilterIcon";
 import Modal from "../components/Modal";
 
-const FilterForm = lazy(() => import("../forms/FilterForm"));
+const FilterForm = lazy(() => import("../components/forms/FilterForm"));
 
 export type CricketersProps = {
   itemsPerPage?: number;
