@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { CSSProperties, Dispatch, SetStateAction } from "react";
 
 export type TMayBe<T> = T | null | undefined;
 
@@ -14,16 +14,20 @@ export type TPlayer = {
   dob?: TMayBe<number>;
 };
 
-export type FilterType = "all" | TPlayerType;
+export type SortBy = "none" | "name" | "rank" | "age";
+export type SortOrder = "asc" | "dsc";
 
 export type SortType = {
-  by: "none" | "name" | "rank" | "age";
-  type: "asc" | "dsc";
+  by: SortBy;
+  type: SortOrder;
 };
 
 export type App = {
   players: TPlayer[];
-  filterType: FilterType;
+};
+
+export type Preferences = {
+  filterType: TMayBe<TPlayerType>;
   sort: SortType;
   theme: "light" | "dark";
 };
@@ -31,6 +35,8 @@ export type App = {
 export type AppContextType = {
   app: App;
   setApp: Dispatch<SetStateAction<App>>;
+  preferences: Preferences;
+  setPreferences: Dispatch<SetStateAction<Preferences>>;
 };
 
 export type ThemeType = {
@@ -48,3 +54,10 @@ export interface BaseThemeOptions {
 export interface ThemeOptions extends BaseThemeOptions {
   error?: BaseThemeOptions | undefined;
 }
+
+export type IconProps = {
+  width?: number;
+  height?: number;
+  style?: CSSProperties;
+  className?: string;
+};
