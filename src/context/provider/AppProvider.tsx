@@ -9,19 +9,17 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
     players: [],
   });
 
-  const [preferences, setPreferences] = usePersistedState<Preferences>({
-    filterType: undefined,
-    sort: {
-      by: "none",
-      type: "asc",
+  const [preferences, setPreferences] = usePersistedState<Preferences>(
+    {
+      filterType: undefined,
+      sort: {
+        by: "none",
+        type: "asc",
+      },
+      theme: "light",
     },
-    theme: "light",
-  }, "cricket-user-preferences");
-
-  const fetchCriketers = async () => {
-    const players = await getPlayers({ type: preferences.filterType });
-    setApp((prev) => ({ ...prev, players }));
-  };
+    "cricket-user-preferences"
+  );
 
   const getSorted = (players: TPlayer[], sort: SortType): TPlayer[] => {
     switch (sort.by) {
@@ -51,15 +49,27 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const fetchCriketers = async () => {
+    const players = await getPlayers({ type: preferences.filterType });
+    setApp((prev) => ({
+      ...prev,
+      players: getSorted(players, preferences.sort),
+    }));
+  };
+
   useEffect(() => {
     fetchCriketers();
   }, [preferences.filterType]);
 
   useEffect(() => {
-    setApp((prev) => ({
-      ...prev,
-      players: getSorted([...prev.players], preferences.sort),
-    }));
+    if (preferences.sort.by === "none") {
+      fetchCriketers();
+    } else {
+      setApp((prev) => ({
+        ...prev,
+        players: getSorted([...prev.players], preferences.sort),
+      }));
+    }
   }, [preferences.sort]);
 
   return (
