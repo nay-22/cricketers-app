@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from "react";
 export type PaginatorProps = {
     items: number;
     limit?: number;
+    className?: string;
     onClick: (page: number, limit: number) => void;
     showControls?: boolean;
     showJumpControls?: boolean;
@@ -35,7 +36,7 @@ export const generateVisiblePages = (currPage: number, totalPages: number[], vis
 };
 
 
-const Paginator: FC<PaginatorProps> = ({ items, limit = 5, onClick, allowLimitChange = false, showControls = false, showJumpControls = false }) => {
+const Paginator: FC<PaginatorProps> = ({ className, items, limit = 5, onClick, allowLimitChange = false, showControls = false, showJumpControls = false }) => {
     const [curr, setCurr] = useState<number>(0);
     const [pages, setPages] = useState<number[]>([]);
     const [visiblePages, setVisiblePages] = useState<(string | number)[]>([]);
@@ -75,7 +76,7 @@ const Paginator: FC<PaginatorProps> = ({ items, limit = 5, onClick, allowLimitCh
 
     return (
         <>
-            <div className="flex items-center justify-center gap-1 p-2">
+            <div className={"flex items-center justify-center gap-1 px-2" + className}>
                 {showControls && <div className="flex items-center justify-center gap-1">
                     {showJumpControls && <button onClick={jumpToFirstPage} className="w-8 py-3 rounded-lg flex items-center justify-center hover:cursor-pointer hover:bg-slate-300">
                         <div className="h-2.5 w-2.5 border-t-3 border-l-3 rounded-tl-sm -rotate-45 border-gray-700"></div>
