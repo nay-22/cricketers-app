@@ -2,20 +2,21 @@ import { ReactNode, useEffect, useState } from "react";
 import { App, Preferences, SortType, TPlayer } from "../../types";
 import AppContext from "../AppContext";
 import getPlayers from "../../api/get-players";
+import usePersistedState from "../../hooks/usePersistedState";
 
 const AppProvider = ({ children }: { children: ReactNode }) => {
   const [app, setApp] = useState<App>({
     players: [],
   });
 
-  const [preferences, setPreferences] = useState<Preferences>({
+  const [preferences, setPreferences] = usePersistedState<Preferences>({
     filterType: undefined,
     sort: {
       by: "none",
       type: "asc",
     },
     theme: "light",
-  });
+  }, "cricket-user-preferences");
 
   const fetchCriketers = async () => {
     const players = await getPlayers({ type: preferences.filterType });
