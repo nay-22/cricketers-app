@@ -1,7 +1,12 @@
-import { useContext } from "react";
+import { lazy, Suspense, useContext } from "react";
 import Switch from "./Switch";
 import AppContext from "../context/AppContext";
 import { Link, useLocation } from "react-router-dom";
+import SearchForm from "./forms/SearchForm";
+import { TPlayer } from "../types";
+import searchPlayers from "../api/search-players";
+
+const ResultView = lazy(() => import("./SearchResultView"));
 
 const Header = () => {
   const context = useContext(AppContext);
@@ -16,7 +21,7 @@ const Header = () => {
   const path = useLocation().pathname;
 
   return (
-    <div className="shadow-md md:shadow-lg p-4 flex items-center justify-between">
+    <div className="shadow-md md:shadow-lg p-4 flex items-center gap-4 justify-between">
       <div className="flex items-center justify-start gap-2">
         {path !== "/" && (
           <Link
@@ -28,6 +33,25 @@ const Header = () => {
         )}
         <div className="font-bold text-amber-500">CricketZ</div>
       </div>
+      <SearchForm<TPlayer[], TPlayer, { name: string; id: string }>
+        dataFetcher={searchPlayers}
+        dataExtractor={(data) => data}
+        resultExtractor={(player) => ({
+          name: player.name || "",
+          id: player.id || "",
+        })}
+        resultView={(props) => (
+          <Suspense
+            fallback={
+              <div className="p-2 flex items-center justify-center">
+                Loading...
+              </div>
+            }
+          >
+            <ResultView {...props} />
+          </Suspense>
+        )}
+      />
       <div>
         <Switch
           on={context?.preferences.theme === "dark"}
