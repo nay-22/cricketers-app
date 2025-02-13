@@ -5,12 +5,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Cricketers from "./pages/Cricketers.tsx";
 import Error from "./pages/Error.tsx";
 import CricketerDetails from "./pages/CricketerDetails.tsx";
+import App from "./App.tsx";
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <App />,
     errorElement: <Error />,
     children: [
-      { path: "/", element: <Cricketers /> },
+      { index: true, element: <Cricketers /> },
       { path: "cricketer/:id", element: <CricketerDetails /> },
     ],
   },
