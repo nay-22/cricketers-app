@@ -45,7 +45,7 @@ const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
 
   return (
     <>
-      <header className="p-2 sticky top-0 bg-white/60 backdrop-blur-[5px] flex items-center justify-between">
+      <header className="hidden p-2 sticky top-0 bg-white/60 backdrop-blur-[5px] md:flex items-center justify-between">
         <div></div>
         <Paginator
           className="grow"
@@ -73,6 +73,23 @@ const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
           </Link>
         ))}
       </div>
+      <footer className="flex p-2 fixed bottom-0 w-full bg-white/60 backdrop-blur-[5px] md:hidden items-center justify-between">
+        <div></div>
+        <Paginator
+          className="grow"
+          showControls
+          showJumpControls
+          limit={itemsPerPage}
+          items={app.players.length}
+          onClick={handlePageChange}
+        />
+        <button
+          className="hover:cursor-pointer hover:bg-gray-100 rounded-lg p-1"
+          onClick={() => setShowModal(true)}
+        >
+          <FilterIcon className="stroke-amber-600" />
+        </button>
+      </footer>
       <Modal open={showModal} onClose={() => setShowModal(false)}>
         <Suspense fallback={<p>Loading...</p>}>
           <FilterForm />
