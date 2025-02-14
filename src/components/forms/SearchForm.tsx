@@ -1,4 +1,4 @@
-import { ComponentType, useEffect, useState } from "react";
+import { ComponentType, CSSProperties, useEffect, useState } from "react";
 import SearchIcon from "../../assets/icons/SearchIcon";
 
 export type SearchFormProps<T, U, V> = {
@@ -7,6 +7,17 @@ export type SearchFormProps<T, U, V> = {
   resultExtractor: (res: U) => V;
   resultView: ComponentType<V>;
   onClick?: (res: U) => void;
+  styleOptions?: {
+    wrapper?: {
+      className?: string;
+      style?: CSSProperties;
+    };
+    icon?: {
+      className?: string;
+      style?: CSSProperties;
+    };
+  };
+  isDark?: boolean;
 };
 
 /**
@@ -20,6 +31,8 @@ const SearchForm = <T, U, V>({
   resultExtractor,
   resultView,
   onClick,
+  styleOptions,
+  isDark = false,
 }: SearchFormProps<T, U, V>) => {
   const [data, setData] = useState<T | undefined>(undefined);
   const [input, setInput] = useState<string>("");
@@ -67,17 +80,23 @@ const SearchForm = <T, U, V>({
   return (
     <div className="relative w-full">
       <div
-        className={`flex items-center justify-center border-1 border-gray-200 px-2 py-2 w-full ${
+        className={`flex items-center justify-center px-2 py-2 w-full ${
           !showRes ? "rounded-lg" : "rounded-t-lg"
-        }`}
+        } ${styleOptions?.wrapper?.className}`}
       >
-        <SearchIcon width={25} />
+        <SearchIcon
+          className={styleOptions?.icon?.className}
+          style={styleOptions?.icon?.style}
+          width={25}
+        />
         <input
           onFocus={() => setShowRes(true)}
           onBlur={() => setTimeout(() => setShowRes(false), 200)}
           type="search"
           placeholder="Type player name..."
-          className="w-full outline-0"
+          className={`w-full outline-0 ${
+            isDark ? "placeholder-white" : "placeholder-black"
+          }`}
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />

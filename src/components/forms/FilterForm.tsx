@@ -4,16 +4,17 @@ import SortIcon from "../../assets/icons/SortIcon";
 import { SortBy, SortOrder, TMayBe, TPlayerType } from "../../types";
 import SortUpIcon from "../../assets/icons/SortUpIcon";
 import FilterIcon from "../../assets/icons/FilterIcon";
+import useTheme from "../../hooks/useTheme";
 
 const FilterForm = () => {
   const context = useContext(AppContext);
+  const theme = useTheme();
 
   if (!context) {
     return null;
   }
 
   const handleFilterChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     context?.setPreferences((prev) => ({
       ...prev,
       filterType: e.target.value as TMayBe<TPlayerType>,
@@ -46,7 +47,9 @@ const FilterForm = () => {
   };
 
   return (
-    <div className="flex items-start justify-center flex-col gap-1 bg-white p-4 rounded-lg w-62">
+    <div
+      className={`flex items-start justify-center flex-col gap-1 ${theme.background?.primary} ${theme.text?.primary} p-4 rounded-lg w-62`}
+    >
       <div className="w-full flex items-start justify-center gap-1 flex-col">
         <div className="w-full flex items-center justify-between">
           <label htmlFor="type">Type</label>
@@ -58,7 +61,7 @@ const FilterForm = () => {
             value={context?.preferences.filterType ?? "Select Type"}
             name="type"
             id="type"
-            className="border-1 border-gray-400 p-2 rounded-md w-full"
+            className={`${theme.background?.accent} border-1 border-gray-400 p-2 rounded-md w-full`}
           >
             <option disabled value={undefined}>
               Select Type
@@ -78,10 +81,12 @@ const FilterForm = () => {
       </div>
       <div className="flex items-center justify-between w-full">
         <h3>Sort By</h3>
-        <SortIcon width={20} height={20} className="fill-amber-500" />
+        <SortIcon width={20} height={20} className={theme.background?.accent} />
       </div>
       <div className="flex items-start justify-between gap-3 flex-col w-full">
-        <div className="bg-slate-200 rounded-md px-2 py-1 gap-2 flex items-center justify-between w-full">
+        <div
+          className={`${theme.background?.tertiary} rounded-md px-2 py-1 gap-2 flex items-center justify-between w-full`}
+        >
           <h6>Name</h6>
           <div className="flex items-center justify-center gap-2">
             <button
@@ -90,7 +95,7 @@ const FilterForm = () => {
               className={`${
                 context?.preferences.sort.by === "name" &&
                 context.preferences.sort.type === "asc"
-                  ? "bg-amber-500 hover:bg-amber-500"
+                  ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
             >
@@ -102,7 +107,7 @@ const FilterForm = () => {
               className={`${
                 context?.preferences.sort.by === "name" &&
                 context.preferences.sort.type === "dsc"
-                  ? "bg-amber-500 hover:bg-amber-500"
+                  ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
             >
@@ -110,7 +115,9 @@ const FilterForm = () => {
             </button>
           </div>
         </div>
-        <div className="bg-slate-200 rounded-md px-2 py-1 gap-2 flex items-center justify-between w-full">
+        <div
+          className={`${theme.background?.tertiary} rounded-md px-2 py-1 gap-2 flex items-center justify-between w-full`}
+        >
           <h6>Rank</h6>
           <div className="flex items-center justify-center gap-2">
             <button
@@ -119,7 +126,7 @@ const FilterForm = () => {
               className={`${
                 context?.preferences.sort.by === "rank" &&
                 context.preferences.sort.type === "asc"
-                  ? "bg-amber-500 hover:bg-amber-500"
+                  ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
             >
@@ -131,7 +138,7 @@ const FilterForm = () => {
               className={`${
                 context?.preferences.sort.by === "rank" &&
                 context.preferences.sort.type === "dsc"
-                  ? "bg-amber-500 hover:bg-amber-500"
+                  ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
             >
@@ -139,7 +146,9 @@ const FilterForm = () => {
             </button>
           </div>
         </div>
-        <div className="bg-slate-200 rounded-md px-2 py-1 gap-2 flex items-center justify-between w-full">
+        <div
+          className={`${theme.background?.tertiary} rounded-md px-2 py-1 gap-2 flex items-center justify-between w-full`}
+        >
           <h6>Age</h6>
           <div className="flex items-center justify-center gap-2">
             <button
@@ -148,7 +157,7 @@ const FilterForm = () => {
               className={`${
                 context?.preferences.sort.by === "age" &&
                 context.preferences.sort.type === "asc"
-                  ? "bg-amber-500 hover:bg-amber-500"
+                  ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
             >
@@ -160,7 +169,7 @@ const FilterForm = () => {
               className={`${
                 context?.preferences.sort.by === "age" &&
                 context.preferences.sort.type === "dsc"
-                  ? "bg-amber-500 hover:bg-amber-500"
+                  ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
             >

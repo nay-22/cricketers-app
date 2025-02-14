@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import AppContext from "../context/AppContext";
 import CricketerCard from "../components/cards/CricketerCard";
+import useTheme from "../hooks/useTheme";
 
 const CricketerDetails = () => {
   const context = useContext(AppContext);
   const { id } = useParams();
+  const theme = useTheme();
 
   const player = context?.app.players.find((pl) => pl.id === id);
   const similarPlayers =
@@ -14,7 +16,7 @@ const CricketerDetails = () => {
     ).slice(0, 5) || [];
 
   return (
-    <div>
+    <div className={`${theme.background?.primary} ${theme.text?.primary} h-screen md:px-10`}>
       <div className="p-4">
         <CricketerCard {...player} />
       </div>

@@ -1,12 +1,21 @@
-import { FC, useEffect, useState } from "react";
+import { CSSProperties, FC, useEffect, useState } from "react";
 
 export type PaginatorProps = {
   items: number;
   limit?: number;
-  className?: string;
   onClick: (page: number, limit: number) => void;
   showControls?: boolean;
   showJumpControls?: boolean;
+  styleOptions?: {
+    wrapper?: {
+      style?: CSSProperties;
+      className?: string;
+    };
+    icons?: {
+      style?: CSSProperties;
+      className?: string;
+    };
+  };
 };
 
 export const generatePages = (items: number, limit: number): number[] => {
@@ -40,12 +49,12 @@ export const generateVisiblePages = (
 };
 
 const Paginator: FC<PaginatorProps> = ({
-  className,
   items,
   limit = 5,
   onClick,
   showControls = false,
   showJumpControls = false,
+  styleOptions,
 }) => {
   const [curr, setCurr] = useState<number>(0);
   const [pages, setPages] = useState<number[]>([]);
@@ -87,24 +96,33 @@ const Paginator: FC<PaginatorProps> = ({
   return (
     <>
       <div
-        className={"flex items-center justify-center gap-1 px-2" + className}
+        className={
+          "flex items-center justify-center gap-1 px-2" +
+          styleOptions?.wrapper?.className
+        }
       >
         {showControls && (
           <div className="flex items-center justify-center gap-1">
             {showJumpControls && (
               <button
                 onClick={jumpToFirstPage}
-                className="w-8 py-3 rounded-lg flex items-center justify-center hover:cursor-pointer hover:bg-slate-300"
+                className="w-8 py-3 rounded-lg flex items-center justify-center hover:cursor-pointer "
               >
-                <div className="h-2.5 w-2.5 border-t-3 border-l-3 rounded-tl-sm -rotate-45 border-gray-700"></div>
-                <div className="h-2.5 w-2.5 border-t-3 border-l-3 rounded-tl-sm -rotate-45 border-gray-700"></div>
+                <div
+                  className={`h-2.5 w-2.5 border-t-3 border-l-3 rounded-tl-sm -rotate-45 ${styleOptions?.icons?.className}`}
+                ></div>
+                <div
+                  className={`h-2.5 w-2.5 border-t-3 border-l-3 rounded-tl-sm -rotate-45 ${styleOptions?.icons?.className}`}
+                ></div>
               </button>
             )}
             <button
               onClick={prev}
-              className="hover:cursor-pointer hover:bg-slate-300 w-8 py-3 flex items-center justify-center rounded-lg"
+              className="hover:cursor-pointer  w-8 py-3 flex items-center justify-center rounded-lg"
             >
-              <div className="h-2.5 w-2.5 border-t-3 border-l-3 rounded-tl-sm -rotate-45 border-gray-700"></div>
+              <div
+                className={`h-2.5 w-2.5 border-t-3 border-l-3 rounded-tl-sm -rotate-45 ${styleOptions?.icons?.className}`}
+              ></div>
             </button>
           </div>
         )}
@@ -112,9 +130,9 @@ const Paginator: FC<PaginatorProps> = ({
           <button
             className={`max-sm:text-sm max-sm:min-w-6 min-w-8 text-center py-1 ${
               typeof p === "number" ? "hover:cursor-pointer" : ""
-            } ${
-              typeof p === "number" && p !== curr ? "hover:bg-slate-300" : ""
-            } rounded-lg ${p === curr ? "bg-amber-400" : ""}`}
+            } ${typeof p === "number" && p !== curr ? "" : ""} rounded-lg ${
+              p === curr ? "bg-amber-400" : ""
+            }`}
             onClick={() => (typeof p === "number" ? handlePageClick(p) : null)}
             key={`${p}-${i}`}
           >
@@ -125,17 +143,23 @@ const Paginator: FC<PaginatorProps> = ({
           <div className="flex items-center justify-center gap-1">
             <button
               onClick={next}
-              className="hover:cursor-pointer hover:bg-slate-300 w-8 py-3 flex items-center justify-center rounded-lg"
+              className="hover:cursor-pointer  w-8 py-3 flex items-center justify-center rounded-lg"
             >
-              <div className="h-2.5 w-2.5 border-t-3 border-r-3 rounded-tr-sm rotate-45 border-gray-700"></div>
+              <div
+                className={`h-2.5 w-2.5 border-t-3 border-r-3 rounded-tr-sm rotate-45 ${styleOptions?.icons?.className}`}
+              ></div>
             </button>
             {showJumpControls && (
               <button
                 onClick={jumpToLastPage}
-                className="flex items-center justify-center w-8 py-3 rounded-lg hover:cursor-pointer hover:bg-slate-300"
+                className="flex items-center justify-center w-8 py-3 rounded-lg hover:cursor-pointer "
               >
-                <div className="h-2.5 w-2.5 border-t-3 border-r-3 rounded-tr-sm rotate-45 border-gray-700"></div>
-                <div className="h-2.5 w-2.5 border-t-3 border-r-3 rounded-tr-sm rotate-45 border-gray-700"></div>
+                <div
+                  className={`h-2.5 w-2.5 border-t-3 border-r-3 rounded-tr-sm rotate-45 ${styleOptions?.icons?.className}`}
+                ></div>
+                <div
+                  className={`h-2.5 w-2.5 border-t-3 border-r-3 rounded-tr-sm rotate-45 ${styleOptions?.icons?.className}`}
+                ></div>
               </button>
             )}
           </div>

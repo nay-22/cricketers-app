@@ -6,6 +6,7 @@ import Paginator from "../components/Paginator";
 import { Link } from "react-router-dom";
 import FilterIcon from "../assets/icons/FilterIcon";
 import Modal from "../components/Modal";
+import useTheme from "../hooks/useTheme";
 
 const FilterForm = lazy(() => import("../components/forms/FilterForm"));
 
@@ -27,6 +28,8 @@ const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
     throw new Error("Context undefined");
   }
 
+  const theme = useTheme();
+
   const { app } = context;
 
   const [paginatedData, setPaginatedData] = useState<TPlayer[]>(
@@ -44,11 +47,22 @@ const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
   };
 
   return (
-    <>
-      <header className="hidden p-2 sticky top-0 bg-white/60 backdrop-blur-[5px] md:flex items-center justify-between">
+    <div
+      className={`${theme.background?.primary} ${theme.text?.primary} min-h-screen md:px-6 lg:px-10`}
+    >
+      <header
+        className={`hidden p-2 sticky top-0 backdrop-blur-[5px] md:flex items-center justify-between`}
+      >
         <div></div>
         <Paginator
-          className="grow"
+          styleOptions={{
+            wrapper: {
+              className: `grow`,
+            },
+            icons: {
+              className: theme.border?.primary,
+            },
+          }}
           showControls
           showJumpControls
           limit={itemsPerPage}
@@ -62,7 +76,9 @@ const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
           <FilterIcon className="stroke-amber-600" />
         </button>
       </header>
-      <div className="flex items-start gap-4 flex-col p-2">
+      <div
+        className={`flex items-start gap-4 flex-col p-2 ${theme.background?.primary}`}
+      >
         {paginatedData.map(({ description, ...rest }: TPlayer, i) => (
           <Link
             key={`${i}-${rest.id}`}
@@ -73,10 +89,17 @@ const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
           </Link>
         ))}
       </div>
-      <footer className="flex p-2 fixed bottom-0 w-full bg-white/60 backdrop-blur-[5px] md:hidden items-center justify-between">
+      <footer className="flex p-2 fixed bottom-0 w-full backdrop-blur-[5px] md:hidden items-center justify-between">
         <div></div>
         <Paginator
-          className="grow"
+          styleOptions={{
+            wrapper: {
+              className: "grow",
+            },
+            icons: {
+              className: theme.border?.primary,
+            },
+          }}
           showControls
           showJumpControls
           limit={itemsPerPage}
@@ -95,7 +118,7 @@ const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
           <FilterForm />
         </Suspense>
       </Modal>
-    </>
+    </div>
   );
 };
 

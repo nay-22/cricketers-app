@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import SearchForm from "./forms/SearchForm";
 import { TPlayer } from "../types";
 import searchPlayers from "../api/search-players";
+import useTheme from "../hooks/useTheme";
 
 const ResultView = lazy(() => import("./SearchResultView"));
 
@@ -18,17 +19,23 @@ const Header = () => {
     }));
   };
 
+  const theme = useTheme();
+
   const path = useLocation().pathname;
 
   return (
-    <div className="shadow-md md:shadow-lg p-4 flex items-center gap-4 justify-between">
+    <div
+      className={`shadow-md md:shadow-lg md:px-12 p-4 flex items-center gap-4 justify-between ${theme.background?.secondary} ${theme.text?.primary}`}
+    >
       <div className="flex items-center justify-start gap-2">
         {path !== "/" && (
           <Link
             to="/"
             className="hover:cursor-pointer hover:bg-slate-300 w-8 h-6 flex items-center justify-center rounded-lg"
           >
-            <div className="h-2.5 w-2.5 border-t-3 border-l-3 rounded-tl-sm -rotate-45 border-gray-700"></div>
+            <div
+              className={`h-2.5 w-2.5 border-t-3 border-l-3 rounded-tl-sm -rotate-45 ${theme.text?.primary}`}
+            ></div>
           </Link>
         )}
         <div className="font-bold text-amber-500">CricketZ</div>
@@ -51,7 +58,20 @@ const Header = () => {
             <ResultView {...props} />
           </Suspense>
         )}
+        styleOptions={{
+          icon: {
+            className:
+              context?.preferences.theme === "dark"
+                ? "fill-white"
+                : "fill-black",
+          },
+          wrapper: {
+            className: `${theme.text?.primary} ${theme.background?.primary}`,
+          },
+        }}
+        isDark={context?.preferences.theme === "dark"}
       />
+
       <div>
         <Switch
           on={context?.preferences.theme === "dark"}
