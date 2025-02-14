@@ -32,13 +32,18 @@ const Header = () => {
           <Link
             to="/"
             className="hover:cursor-pointer hover:bg-slate-300 w-8 h-6 flex items-center justify-center rounded-lg"
+            aria-label="Back/Home"
           >
             <div
               className={`h-2.5 w-2.5 border-t-3 border-l-3 rounded-tl-sm -rotate-45 ${theme.text?.primary}`}
             ></div>
           </Link>
         )}
-        <div className="font-bold text-amber-500">CricketZ</div>
+        <div
+          className={`font-bold text-amber-400 bg-slate-800 p-2.5 rounded-lg`}
+        >
+          CricketZ
+        </div>
       </div>
       <SearchForm<TPlayer[], TPlayer, { name: string; id: string }>
         dataFetcher={searchPlayers}

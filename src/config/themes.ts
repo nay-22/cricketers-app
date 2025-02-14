@@ -5,7 +5,7 @@ export const darkTheme: ThemeOptions = {
     primary: "bg-dark-bg-primary",
     secondary: "bg-dark-bg-secondary",
     tertiary: "bg-dark-bg-tertiary",
-    accent: "bg-amber-500",
+    accent: "bg-amber-600",
   },
   text: {
     primary: "text-dark-text-primary",

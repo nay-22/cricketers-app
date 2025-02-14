@@ -5,7 +5,6 @@ import getAge from "../../utils/get-age";
 import useTheme from "../../hooks/useTheme";
 
 const CricketerCard: FC<TPlayer> = ({
-  id,
   name,
   description,
   type,

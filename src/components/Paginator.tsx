@@ -107,6 +107,7 @@ const Paginator: FC<PaginatorProps> = ({
               <button
                 onClick={jumpToFirstPage}
                 className="w-8 py-3 rounded-lg flex items-center justify-center hover:cursor-pointer "
+                aria-label="First Page"
               >
                 <div
                   className={`h-2.5 w-2.5 border-t-3 border-l-3 rounded-tl-sm -rotate-45 ${styleOptions?.icons?.className}`}
@@ -119,6 +120,7 @@ const Paginator: FC<PaginatorProps> = ({
             <button
               onClick={prev}
               className="hover:cursor-pointer  w-8 py-3 flex items-center justify-center rounded-lg"
+              aria-label="Previous Page"
             >
               <div
                 className={`h-2.5 w-2.5 border-t-3 border-l-3 rounded-tl-sm -rotate-45 ${styleOptions?.icons?.className}`}
@@ -131,7 +133,7 @@ const Paginator: FC<PaginatorProps> = ({
             className={`max-sm:text-sm max-sm:min-w-6 min-w-8 text-center py-1 ${
               typeof p === "number" ? "hover:cursor-pointer" : ""
             } ${typeof p === "number" && p !== curr ? "" : ""} rounded-lg ${
-              p === curr ? "bg-amber-400" : ""
+              p === curr ? "bg-amber-600" : ""
             }`}
             onClick={() => (typeof p === "number" ? handlePageClick(p) : null)}
             key={`${p}-${i}`}
@@ -144,6 +146,7 @@ const Paginator: FC<PaginatorProps> = ({
             <button
               onClick={next}
               className="hover:cursor-pointer  w-8 py-3 flex items-center justify-center rounded-lg"
+              aria-label="Next Page"
             >
               <div
                 className={`h-2.5 w-2.5 border-t-3 border-r-3 rounded-tr-sm rotate-45 ${styleOptions?.icons?.className}`}
@@ -153,6 +156,7 @@ const Paginator: FC<PaginatorProps> = ({
               <button
                 onClick={jumpToLastPage}
                 className="flex items-center justify-center w-8 py-3 rounded-lg hover:cursor-pointer "
+                aria-label="Last Page"
               >
                 <div
                   className={`h-2.5 w-2.5 border-t-3 border-r-3 rounded-tr-sm rotate-45 ${styleOptions?.icons?.className}`}

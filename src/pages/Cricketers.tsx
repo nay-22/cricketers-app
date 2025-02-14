@@ -15,13 +15,12 @@ export type CricketersProps = {
 };
 
 /**
- * TODO:
- * - Search(TypeAhead)
+ * 
  * @returns
  */
 const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  
+
   const { app } = useApp();
   const theme = useTheme();
 
@@ -65,6 +64,7 @@ const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
         <button
           className="hover:cursor-pointer hover:bg-gray-100 rounded-lg p-1"
           onClick={() => setShowModal(true)}
+          aria-label="Filter"
         >
           <FilterIcon className="stroke-amber-600" />
         </button>
@@ -102,6 +102,7 @@ const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
         <button
           className="hover:cursor-pointer hover:bg-gray-100 rounded-lg p-1"
           onClick={() => setShowModal(true)}
+          aria-label="Filter"
         >
           <FilterIcon className="stroke-amber-600" />
         </button>
