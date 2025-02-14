@@ -49,6 +49,7 @@ export type ThemeType = {
 export interface BaseThemeOptions {
   text?: ThemeType | undefined;
   background?: ThemeType | undefined;
+  border?: ThemeType | undefined;
 }
 
 export interface ThemeOptions extends BaseThemeOptions {
