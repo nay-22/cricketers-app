@@ -1,5 +1,4 @@
-import { FC, lazy, Suspense, useContext, useEffect, useState } from "react";
-import AppContext from "../context/AppContext";
+import { FC, lazy, Suspense, useEffect, useState } from "react";
 import CricketerCard from "../components/cards/CricketerCard";
 import { TPlayer } from "../types";
 import Paginator from "../components/Paginator";
@@ -7,6 +6,7 @@ import { Link } from "react-router-dom";
 import FilterIcon from "../assets/icons/FilterIcon";
 import Modal from "../components/Modal";
 import useTheme from "../hooks/useTheme";
+import useApp from "../hooks/useApp";
 
 const FilterForm = lazy(() => import("../components/forms/FilterForm"));
 
@@ -21,16 +21,9 @@ export type CricketersProps = {
  */
 const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
-
-  const context = useContext(AppContext);
-
-  if (!context) {
-    throw new Error("Context undefined");
-  }
-
+  
+  const { app } = useApp();
   const theme = useTheme();
-
-  const { app } = context;
 
   const [paginatedData, setPaginatedData] = useState<TPlayer[]>(
     app.players.slice(0, itemsPerPage)

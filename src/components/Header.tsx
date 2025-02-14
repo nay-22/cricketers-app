@@ -1,19 +1,19 @@
-import { lazy, Suspense, useContext } from "react";
+import { lazy, Suspense } from "react";
 import Switch from "./Switch";
-import AppContext from "../context/AppContext";
 import { Link, useLocation } from "react-router-dom";
 import SearchForm from "./forms/SearchForm";
 import { TPlayer } from "../types";
 import searchPlayers from "../api/search-players";
 import useTheme from "../hooks/useTheme";
+import useApp from "../hooks/useApp";
 
 const ResultView = lazy(() => import("./SearchResultView"));
 
 const Header = () => {
-  const context = useContext(AppContext);
+  const { preferences, setPreferences } = useApp();
 
   const toggleTheme = () => {
-    context?.setPreferences((prev) => ({
+    setPreferences((prev) => ({
       ...prev,
       theme: prev.theme === "dark" ? "light" : "dark",
     }));
@@ -61,22 +61,17 @@ const Header = () => {
         styleOptions={{
           icon: {
             className:
-              context?.preferences.theme === "dark"
-                ? "fill-white"
-                : "fill-black",
+              preferences.theme === "dark" ? "fill-white" : "fill-black",
           },
           wrapper: {
             className: `${theme.text?.primary} ${theme.background?.primary}`,
           },
         }}
-        isDark={context?.preferences.theme === "dark"}
+        isDark={preferences.theme === "dark"}
       />
 
       <div>
-        <Switch
-          on={context?.preferences.theme === "dark"}
-          onClick={toggleTheme}
-        />
+        <Switch on={preferences.theme === "dark"} onClick={toggleTheme} />
       </div>
     </div>
   );

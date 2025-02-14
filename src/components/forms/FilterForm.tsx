@@ -1,34 +1,30 @@
-import { ChangeEvent, MouseEvent, useContext } from "react";
-import AppContext from "../../context/AppContext";
-import SortIcon from "../../assets/icons/SortIcon";
+import { ChangeEvent, MouseEvent } from "react";
 import { SortBy, SortOrder, TMayBe, TPlayerType } from "../../types";
 import SortUpIcon from "../../assets/icons/SortUpIcon";
 import FilterIcon from "../../assets/icons/FilterIcon";
+import SortIcon from "../../assets/icons/SortIcon";
 import useTheme from "../../hooks/useTheme";
+import useApp from "../../hooks/useApp";
 
 const FilterForm = () => {
-  const context = useContext(AppContext);
+  const { preferences, setPreferences } = useApp();
   const theme = useTheme();
 
-  if (!context) {
-    return null;
-  }
-
   const handleFilterChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    context?.setPreferences((prev) => ({
+    setPreferences((prev) => ({
       ...prev,
       filterType: e.target.value as TMayBe<TPlayerType>,
     }));
   };
 
   const clearFilterType = () =>
-    context.setPreferences((prev) => ({ ...prev, filterType: undefined }));
+    setPreferences((prev) => ({ ...prev, filterType: undefined }));
 
   const handleSortChange = (e: MouseEvent) => {
     const [by, type] = e.currentTarget.id.split("-") as [SortBy, SortOrder];
-    const { sort } = context?.preferences;
+    const { sort } = preferences;
     if (sort.by === by && sort.type === type) {
-      context.setPreferences((prev) => ({
+      setPreferences((prev) => ({
         ...prev,
         sort: {
           by: "none",
@@ -36,7 +32,7 @@ const FilterForm = () => {
         },
       }));
     } else {
-      context?.setPreferences((prev) => ({
+      setPreferences((prev) => ({
         ...prev,
         sort: {
           by,
@@ -58,7 +54,7 @@ const FilterForm = () => {
         <div className="flex items-center justify-between gap-2 w-full">
           <select
             onChange={handleFilterChange}
-            value={context?.preferences.filterType ?? "Select Type"}
+            value={preferences.filterType ?? "Select Type"}
             name="type"
             id="type"
             className={`${theme.background?.accent} border-1 border-gray-400 p-2 rounded-md w-full`}
@@ -93,8 +89,8 @@ const FilterForm = () => {
               id="name-asc"
               onClick={handleSortChange}
               className={`${
-                context?.preferences.sort.by === "name" &&
-                context.preferences.sort.type === "asc"
+                preferences.sort.by === "name" &&
+                preferences.sort.type === "asc"
                   ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
@@ -105,8 +101,8 @@ const FilterForm = () => {
               id="name-dsc"
               onClick={handleSortChange}
               className={`${
-                context?.preferences.sort.by === "name" &&
-                context.preferences.sort.type === "dsc"
+                preferences.sort.by === "name" &&
+                preferences.sort.type === "dsc"
                   ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
@@ -124,8 +120,8 @@ const FilterForm = () => {
               id="rank-asc"
               onClick={handleSortChange}
               className={`${
-                context?.preferences.sort.by === "rank" &&
-                context.preferences.sort.type === "asc"
+                preferences.sort.by === "rank" &&
+                preferences.sort.type === "asc"
                   ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
@@ -136,8 +132,8 @@ const FilterForm = () => {
               id="rank-dsc"
               onClick={handleSortChange}
               className={`${
-                context?.preferences.sort.by === "rank" &&
-                context.preferences.sort.type === "dsc"
+                preferences.sort.by === "rank" &&
+                preferences.sort.type === "dsc"
                   ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
@@ -155,8 +151,7 @@ const FilterForm = () => {
               id="age-asc"
               onClick={handleSortChange}
               className={`${
-                context?.preferences.sort.by === "age" &&
-                context.preferences.sort.type === "asc"
+                preferences.sort.by === "age" && preferences.sort.type === "asc"
                   ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
@@ -167,8 +162,7 @@ const FilterForm = () => {
               id="age-dsc"
               onClick={handleSortChange}
               className={`${
-                context?.preferences.sort.by === "age" &&
-                context.preferences.sort.type === "dsc"
+                preferences.sort.by === "age" && preferences.sort.type === "dsc"
                   ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
