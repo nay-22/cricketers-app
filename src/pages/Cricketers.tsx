@@ -40,7 +40,7 @@ const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
 
   return (
     <div
-      className={`${theme.background?.primary} ${theme.text?.primary} min-h-screen md:px-6 lg:px-10`}
+      className={`${theme.background?.primary} ${theme.text?.primary} min-h-screen md:px-6 lg:px-10 max-md:pb-12`}
     >
       <header
         className={`hidden p-2 sticky top-0 backdrop-blur-[5px] md:flex items-center justify-between`}
