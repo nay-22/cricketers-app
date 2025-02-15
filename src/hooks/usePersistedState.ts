@@ -12,7 +12,7 @@ const usePersistedState = <T>(initialState: T, key: string) => {
   });
 
   useEffect(() => {
-    let timer: number;
+    let timer: NodeJS.Timeout;
     try {
       timer = setTimeout(() => {
         localStorage.setItem(key, JSON.stringify(state));
