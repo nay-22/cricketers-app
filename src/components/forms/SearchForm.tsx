@@ -60,7 +60,7 @@ const SearchForm = <T, U, V>({
   };
 
   useEffect(() => {
-    let timer: number;
+    let timer: NodeJS.Timeout;
     if (input === "") {
       setIsLoading(false);
       setResults(undefined);
@@ -78,7 +78,7 @@ const SearchForm = <T, U, V>({
   const ResultViewComponent = resultView;
 
   return (
-    <div className="relative w-full">
+    <div data-testid="search-form" className="relative w-full">
       <div
         className={`flex items-center justify-center px-2 py-2 w-full ${
           !showRes ? "rounded-lg" : "rounded-t-lg"

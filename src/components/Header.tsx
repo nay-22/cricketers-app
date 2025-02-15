@@ -30,6 +30,7 @@ const Header = () => {
       <div className="flex items-center justify-start gap-2">
         {path !== "/" && (
           <Link
+            data-testid="Back/Home"
             to="/"
             className="hover:cursor-pointer hover:bg-slate-300 w-8 h-6 flex items-center justify-center rounded-lg"
             aria-label="Back/Home"

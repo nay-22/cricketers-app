@@ -70,6 +70,7 @@ const FilterForm = () => {
           <button
             onClick={clearFilterType}
             className="hover:cursor-pointer text-center w-7 h-full rounded-full bg-red-300"
+            data-testid="clear-filter"
           >
             x
           </button>
@@ -94,6 +95,7 @@ const FilterForm = () => {
                   ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
+              data-testid="name-asc"
             >
               <SortUpIcon />
             </button>
@@ -106,6 +108,7 @@ const FilterForm = () => {
                   ? `${theme.background?.accent}`
                   : ""
               } p-1 hover:cursor-pointer rounded-md`}
+              data-testid="name-dsc"
             >
               <SortUpIcon className="rotate-180" />
             </button>
