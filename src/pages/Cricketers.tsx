@@ -7,6 +7,7 @@ import FilterIcon from "../assets/icons/FilterIcon";
 import Modal from "../components/Modal";
 import useTheme from "../hooks/useTheme";
 import useApp from "../hooks/useApp";
+import Loader from "../components/Loader";
 
 const FilterForm = lazy(() => import("../components/forms/FilterForm"));
 
@@ -15,7 +16,7 @@ export type CricketersProps = {
 };
 
 /**
- * 
+ *
  * @returns
  */
 const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
@@ -40,7 +41,7 @@ const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
 
   return (
     <div
-      className={`${theme.background?.primary} ${theme.text?.primary} min-h-screen md:px-6 lg:px-10 max-md:pb-12`}
+      className={`${theme.background?.primary} ${theme.text?.primary} md:px-6 lg:px-10 max-md:pb-12`}
     >
       <header
         className={`hidden p-2 sticky top-0 backdrop-blur-[5px] md:flex items-center justify-between`}
@@ -108,7 +109,7 @@ const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
         </button>
       </footer>
       <Modal open={showModal} onClose={() => setShowModal(false)}>
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<Loader />}>
           <FilterForm />
         </Suspense>
       </Modal>
