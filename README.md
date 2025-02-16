@@ -1,50 +1,41 @@
-# React + TypeScript + Vite
+# The Cricketers App
+An interactive web application showcasing detailed profiles of Indian cricket players. Users can,
+- explore player information
+- filter and sort by various attributes
+- and navigate through paginated lists seamlessly. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Built with a modern tech stack, the app prioritizes performance, accessibility, and a responsive user experience.
 
-Currently, two official plugins are available:
+## Techstack
+- **React** v19+
+- **React Router** v7+
+- **TypeScript** v5+
+- **Tailwind CSS** v4+
+- **Vite** v6+
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+### App
+- Custom hooks to enable custom providers and local state persistence.
+- Theming support with dynamic styles and custom theme provider.
+- Lazy loading to improve first load performance.
+- Responsive layout to support various screen sizes.
+- Ensured accessibility using aria-labels.
+- Typeahead(SearchForm) to search players by name with support for keyboard navigation.
+- Genreric Loaders and Error components.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Cricketers Page:
+- View list of cricketer links with pagination support.
+- Responsive paginator implementing sliding window to render limited page numbers.
+- Improved paginator accessibility by conditional rendering of paginator to footer for smaller hand-held devices.
+- Filter Modal to enable sorting and filtering on various parameters.
 
-- Configure the top-level `parserOptions` property like this:
+### Cricketer Details Page:
+- Avails resusable CricketerCard that conditionally renders all cricketer details.
+- Displays upto 5 similar cricketers conforming to the same type using the CricketerCard but, to render certain details only.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Potential Improvements
+- Support local & session caching in **SearchForm**.
+- Improved theming to support other properties.
+- Lazy loading for heavy components such as SearchForm, FilterForm, etc...
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
