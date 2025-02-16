@@ -2,6 +2,10 @@ import { Link, useParams } from "react-router-dom";
 import CricketerCard from "../components/cards/CricketerCard";
 import useTheme from "../hooks/useTheme";
 import useApp from "../hooks/useApp";
+import { lazy, Suspense } from "react";
+import Loader from "../components/Loader.tsx";
+
+const Error = lazy(() => import("../pages/Error.tsx"));
 
 const CricketerDetails = () => {
   const { id } = useParams();
@@ -14,9 +18,20 @@ const CricketerDetails = () => {
       .filter((pl1) => pl1.type === player?.type && pl1.id !== player?.id)
       .slice(0, 5) || [];
 
+  if (!player) {
+    return (
+      <Suspense fallback={<Loader type="page" />}>
+        <Error
+          title="404"
+          message="Oops! The requested player does not exist."
+        />
+      </Suspense>
+    );
+  }
+
   return (
     <div
-      className={`${theme.background?.primary} ${theme.text?.primary} h-screen md:px-10`}
+      className={`${theme.text?.primary} md:px-10`}
     >
       <div className="p-4">
         <CricketerCard {...player} />
