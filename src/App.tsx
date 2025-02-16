@@ -1,17 +1,16 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
-import AppProvider from "./context/provider/AppProvider";
-import ThemeProvider from "./context/provider/ThemeProvider";
+import useTheme from "./hooks/useTheme";
 
 function App() {
+  const theme = useTheme();
+
   return (
-    <AppProvider>
-      <ThemeProvider>
-        <Header />
-        <Outlet />
-      </ThemeProvider>
-    </AppProvider>
+    <div className={`h-screen ${theme.background?.primary} `}>
+      <Header />
+      <Outlet />
+    </div>
   );
 }
 
