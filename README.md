@@ -6,6 +6,10 @@ An interactive web application showcasing detailed profiles of Indian cricket pl
 
 Built with a modern tech stack, the app prioritizes performance, accessibility, and a responsive user experience.
 
+## Links
+- https://cricketers-bzvh6y51e-nayans-projects-ca58165e.vercel.app/
+- https://cricketers-app-sepia.vercel.app/
+
 ## Techstack
 - **React** v19+
 - **React Router** v7+
@@ -13,14 +17,34 @@ Built with a modern tech stack, the app prioritizes performance, accessibility, 
 - **Tailwind CSS** v4+
 - **Vite** v6+
 
+## Installation
+```sh
+git clone https://github.com/nay-22/cricketers-app.git
+```
+
+```sh
+cd cricketers-app
+```
+
+```sh
+npm install
+```
+
+```sh
+npm run dev
+```
+
+Open: http://localhost:5173/
+
 ## Features
 
-### Performance (built modules served at port: 4173)
+### Performance (vercel-deployed)
 - Lighthouse (Light Mode - Desktop)
-  ![cricketers-preview-lighthouse-score-light-mode](https://github.com/user-attachments/assets/38afc2f0-d74b-43e1-b186-e13ee0a0cff1)
+  ![cricketers-preview-lighthouse-score-light-mode](https://github.com/user-attachments/assets/c9e5a20e-6d94-49ac-833c-93d8ea123d93)
+
 
 - Lighthouse (Dark Mode - Desktop)
-  ![cricketers-preview-lighthouse-score-dark-mode](https://github.com/user-attachments/assets/c8791375-4ebc-43a3-b620-d690b78a722b)
+  ![cricketers-preview-lighthouse-score-dark-mode](https://github.com/user-attachments/assets/49484753-0d88-4ac3-b38e-69b8e4d45023)
 
 ### App
 - Custom hooks to enable custom providers and local state persistence.
