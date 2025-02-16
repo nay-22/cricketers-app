@@ -5,6 +5,8 @@ const Switch: FC<SwitchProps> = ({ on, onClick, icon }) => {
   return (
     <div
       role="switch"
+      aria-label="switch-button"
+      aria-checked={on}
       onClick={onClick}
       className="bg-slate-400 rounded-full w-8"
     >
