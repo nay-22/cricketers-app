@@ -1,5 +1,18 @@
 import { useEffect, useState } from "react";
 
+/**
+ * usePersistedState Hook
+ *
+ * Manages a state that is synchronized with localStorage.
+ *
+ * @template T - The type of the state value
+ *
+ * @param {T} initialState - The initial state value
+ * @param {string} key - The localStorage key for persistence
+ *
+ * @returns {[T, React.Dispatch<React.SetStateAction<T>>]} The current state and a function to update it
+ */
+
 const usePersistedState = <T>(initialState: T, key: string) => {
   const [state, setState] = useState<T>(() => {
     try {

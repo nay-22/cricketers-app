@@ -6,6 +6,20 @@ export type ModalProps = {
   children?: ReactNode;
 };
 
+/**
+ * Modal Component
+ * 
+ * Renders a modal dialog with support for outside click handling and body scroll lock.
+ * 
+ * @component
+ * 
+ * @param {Object} props - Component properties
+ * @param {boolean} props.open - Controls whether the modal is open or closed
+ * @param {function} props.onClose - Callback function to close the modal
+ * @param {ReactNode} props.children - Content to be displayed inside the modal
+ * 
+ * @returns {JSX.Element | null} The rendered Modal component if open, otherwise null
+ */
 const Modal: FC<ModalProps> = ({ open, onClose, children }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 

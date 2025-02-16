@@ -3,6 +3,20 @@ import useTheme from "../hooks/useTheme";
 import { FC, useEffect } from "react";
 import { ErrorProps } from "../types";
 
+/**
+ * Error Page
+ * 
+ * Displays an error message with a title and auto-navigates to the home page after 10 seconds.
+ * Provides a manual navigation option via a "Go Home" link.
+ * 
+ * @page
+ * 
+ * @param {Object} props - Component properties
+ * @param {string} props.title - The title of the error message
+ * @param {string} props.message - The detailed error message
+ * 
+ * @returns {JSX.Element} The rendered Error component
+ */
 const Error: FC<ErrorProps> = ({ title, message }) => {
   const theme = useTheme();
   const navigate = useNavigate();

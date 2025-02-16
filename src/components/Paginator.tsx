@@ -31,6 +31,26 @@ export const generateVisiblePages = (
   return visible;
 };
 
+/**
+ * Paginator Component
+ *
+ * Renders a pagination control for navigating through pages of items.
+ * Supports showing navigation controls (next, previous, first, last) and custom styling options.
+ *
+ * @component
+ *
+ * @param {Object} props - Component properties
+ * @param {number} props.items - Total number of items to paginate
+ * @param {number} [props.limit=5] - Number of items per page
+ * @param {function} props.onClick - Callback function invoked when a page is selected
+ * @param {boolean} [props.showControls=false] - Whether to display next/previous page controls
+ * @param {boolean} [props.showJumpControls=false] - Whether to display first/last page jump controls
+ * @param {Object} [props.styleOptions] - Custom styling options
+ * @param {Object} [props.styleOptions.wrapper] - Styles for the pagination wrapper
+ * @param {Object} [props.styleOptions.icons] - Styles for pagination control icons
+ *
+ * @returns {JSX.Element} The rendered Paginator component
+ */
 const Paginator: FC<PaginatorProps> = ({
   items,
   limit = 5,

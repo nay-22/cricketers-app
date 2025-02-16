@@ -1,4 +1,4 @@
-import { FC, lazy, Suspense, useEffect, useState } from "react";
+import { FC, JSX, lazy, Suspense, useEffect, useState } from "react";
 import CricketerCard from "../components/cards/CricketerCard";
 import { TPlayer } from "../types";
 import Paginator from "../components/Paginator";
@@ -16,10 +16,22 @@ export type CricketersProps = {
 };
 
 /**
+ * Cricketers Page
  *
- * @returns
+ * Displays a paginated list of cricketers with filtering options.
+ *
+ * Users can navigate through pages, apply filters using a modal, and navigate to individual cricketer details.
+ *
+ * @page
+ *
+ * @param {Object} props - Component properties
+ * @param {number} [props.itemsPerPage=10] - Number of cricketers to display per page
+ *
+ * @returns {JSX.Element} The rendered Cricketers component
  */
-const Cricketers: FC<CricketersProps> = ({ itemsPerPage = 10 }) => {
+const Cricketers: FC<CricketersProps> = ({
+  itemsPerPage = 10,
+}): JSX.Element => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const { app } = useApp();

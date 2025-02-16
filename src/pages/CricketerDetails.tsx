@@ -2,12 +2,23 @@ import { Link, useParams } from "react-router-dom";
 import CricketerCard from "../components/cards/CricketerCard";
 import useTheme from "../hooks/useTheme";
 import useApp from "../hooks/useApp";
-import { lazy, Suspense } from "react";
+import { JSX, lazy, Suspense } from "react";
 import Loader from "../components/Loader.tsx";
 
 const Error = lazy(() => import("../pages/Error.tsx"));
 
-const CricketerDetails = () => {
+/**
+ * CricketerDetails Page
+ *
+ * Displays detailed information about a cricketer and shows similar cricketers based on their type.
+ *
+ * If the cricketer is not found, it renders the Error page component with a 404 message.
+ *
+ * @page
+ *
+ * @returns {JSX.Element} The rendered CricketerDetails component
+ */
+const CricketerDetails = (): JSX.Element => {
   const { id } = useParams();
   const { app } = useApp();
   const theme = useTheme();
@@ -30,9 +41,7 @@ const CricketerDetails = () => {
   }
 
   return (
-    <div
-      className={`${theme.text?.primary} md:px-10`}
-    >
+    <div className={`${theme.text?.primary} md:px-10`}>
       <div className="p-4">
         <CricketerCard {...player} />
       </div>

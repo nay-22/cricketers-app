@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import Switch from "./Switch";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SearchForm from "./forms/SearchForm";
 import { TPlayer } from "../types";
 import searchPlayers from "../api/search-players";
@@ -12,6 +12,7 @@ const ResultView = lazy(() => import("./SearchResultView"));
 
 const Header = () => {
   const { preferences, setPreferences } = useApp();
+  const navigate = useNavigate();
 
   const toggleTheme = () => {
     setPreferences((prev) => ({
@@ -69,6 +70,7 @@ const Header = () => {
           },
         }}
         isDark={preferences.theme === "dark"}
+        onClick={(player) => navigate(`/cricketer/${player.id}`)}
       />
 
       <div>

@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, JSX, MouseEvent } from "react";
 import { SortBy, SortOrder, TMayBe, TPlayerType } from "../../types";
 import SortUpIcon from "../../assets/icons/SortUpIcon";
 import FilterIcon from "../../assets/icons/FilterIcon";
@@ -6,7 +6,16 @@ import SortIcon from "../../assets/icons/SortIcon";
 import useTheme from "../../hooks/useTheme";
 import useApp from "../../hooks/useApp";
 
-const FilterForm = () => {
+/**
+ * FilterForm Component
+ *
+ * Provides filtering and sorting options for a list of players.
+ *
+ * @component
+ * 
+ * @returns {JSX.Element} The rendered FilterForm component
+ */
+const FilterForm = (): JSX.Element => {
   const { preferences, setPreferences } = useApp();
   const theme = useTheme();
 
