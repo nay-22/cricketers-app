@@ -6,6 +6,7 @@ import { TPlayer } from "../types";
 import searchPlayers from "../api/search-players";
 import useTheme from "../hooks/useTheme";
 import useApp from "../hooks/useApp";
+import Loader from "./Loader";
 
 const ResultView = lazy(() => import("./SearchResultView"));
 
@@ -54,13 +55,7 @@ const Header = () => {
           id: player.id || "",
         })}
         resultView={(props) => (
-          <Suspense
-            fallback={
-              <div className="p-2 flex items-center justify-center">
-                Loading...
-              </div>
-            }
-          >
+          <Suspense fallback={<Loader />}>
             <ResultView {...props} />
           </Suspense>
         )}
