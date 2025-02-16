@@ -4,6 +4,9 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Cricketers from "./pages/Cricketers.tsx";
 import App from "./App.tsx";
+import Loader from "./components/Loader.tsx";
+import AppProvider from "./context/provider/AppProvider.tsx";
+import ThemeProvider from "./context/provider/ThemeProvider.tsx";
 
 const Error = lazy(() => import("./pages/Error.tsx"));
 
@@ -14,12 +17,8 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     errorElement: (
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center">Loading...</div>
-        }
-      >
-        <Error />
+      <Suspense fallback={<Loader type="page" />}>
+        <Error title="404" message="Oops! Page not found." />
       </Suspense>
     ),
     children: [
@@ -27,11 +26,7 @@ const router = createBrowserRouter([
       {
         path: "cricketer/:id",
         element: (
-          <Suspense
-            fallback={
-              <div className="flex items-center justify-center">Loading...</div>
-            }
-          >
+          <Suspense fallback={<Loader type="page" />}>
             <CricketerDetails />
           </Suspense>
         ),
@@ -42,6 +37,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AppProvider>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </AppProvider>
   </StrictMode>
 );
