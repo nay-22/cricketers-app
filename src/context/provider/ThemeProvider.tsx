@@ -1,12 +1,8 @@
-import { ReactNode, useEffect, useState } from "react";
-import { ThemeOptions } from "../../types";
+import { useEffect, useState } from "react";
+import { ThemeOptions, ThemeProviderProps } from "../../types";
 import { darkTheme, lightTheme } from "../../config/themes";
 import ThemeContext from "../ThemeContext";
 import useApp from "../../hooks/useApp";
-
-export type ThemeProviderProps = {
-  children: ReactNode;
-};
 
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<ThemeOptions>(lightTheme);

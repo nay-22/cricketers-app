@@ -1,22 +1,5 @@
-import { CSSProperties, FC, useEffect, useState } from "react";
-
-export type PaginatorProps = {
-  items: number;
-  limit?: number;
-  onClick: (page: number, limit: number) => void;
-  showControls?: boolean;
-  showJumpControls?: boolean;
-  styleOptions?: {
-    wrapper?: {
-      style?: CSSProperties;
-      className?: string;
-    };
-    icons?: {
-      style?: CSSProperties;
-      className?: string;
-    };
-  };
-};
+import { FC, useEffect, useState } from "react";
+import { PaginatorProps } from "../types";
 
 export const generatePages = (items: number, limit: number): number[] => {
   return [...Array(Math.ceil(items / limit)).keys()].map((i) => i);

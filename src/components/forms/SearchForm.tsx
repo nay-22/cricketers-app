@@ -1,24 +1,6 @@
-import { ComponentType, CSSProperties, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SearchIcon from "../../assets/icons/SearchIcon";
-
-export type SearchFormProps<T, U, V> = {
-  dataFetcher: (q: string) => Promise<T>;
-  dataExtractor: (data: T) => U[];
-  resultExtractor: (res: U) => V;
-  resultView: ComponentType<V>;
-  onClick?: (res: U) => void;
-  styleOptions?: {
-    wrapper?: {
-      className?: string;
-      style?: CSSProperties;
-    };
-    icon?: {
-      className?: string;
-      style?: CSSProperties;
-    };
-  };
-  isDark?: boolean;
-};
+import { SearchFormProps } from "../../types";
 
 /**
  * TODO:
